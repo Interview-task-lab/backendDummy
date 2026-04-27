@@ -48,6 +48,8 @@ public class AuthController {
     @GetMapping("/dashbooard")
     public ResponseEntity<?> dashboard() {
         return ResponseEntity.status(HttpStatus.OK).body("Dashboard");
+    }
+
     @PostMapping("/github")
     public ResponseEntity<?> github(@RequestBody LoginRequest loginRequest) {
         Optional<User> userOptional = userRepository.findByUsername(loginRequest.getUsername());
