@@ -33,4 +33,10 @@ public class AuthController {
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
     }
+
+    @GetMapping("/dashbooard")
+    public ResponseEntity<?> dashboard() {
+        return ResponseEntity.status(HttpStatus.OK).body("Dashboard");
+    }
+
 }
