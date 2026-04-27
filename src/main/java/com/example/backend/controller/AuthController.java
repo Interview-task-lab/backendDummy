@@ -31,9 +31,18 @@ public class AuthController {
         Optional<User> userOptional = userRepository.findByUsername(loginRequest.getUsername());
 
         if (userOptional.isPresent() && passwordEncoder.matches(loginRequest.getPassword(), userOptional.get().getPassword())) {
-            // In a real app, we would return a JWT here. 
-            // For this demo, we'll return a simple success response with a mock token.
             return ResponseEntity.ok(new LoginResponse("mock-jwt-token", userOptional.get().getUsername()));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+    }
+
+    @PostMapping("/gmail")
+    public ResponseEntity<?> gmail(@RequestBody LoginRequest loginRequest) {
+        Optional<User> userOptional = userRepository.findByUsername(loginRequest.getUsername());
+
+        if (userOptional.isPresent() && passwordEncoder.matches(loginRequest.getPassword(), userOptional.get().getPassword())) {
+            return ResponseEntity.ok(new LoginResponse("mock-gmail", userOptional.get().getUsername()));
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
