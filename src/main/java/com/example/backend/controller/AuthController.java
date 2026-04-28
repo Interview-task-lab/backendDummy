@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.GmailRequest;
 import com.example.backend.dto.LoginRequest;
 import com.example.backend.dto.LoginResponse;
 import com.example.backend.model.User;
@@ -32,5 +33,10 @@ public class AuthController {
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+    }
+
+    @PostMapping("/gmail")
+    public ResponseEntity<?> register(@RequestBody GmailRequest gmailRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body("Gmail ile giriş yapıldı");
     }
 }
