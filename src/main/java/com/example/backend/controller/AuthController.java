@@ -35,20 +35,12 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
     }
 
+    @PostMapping("/profile")
+    public ResponseEntity<?> profile(@RequestBody GmailRequest gmailRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body("Profile sayfası açıldı.");
+    }
     @PostMapping("/gmail")
     public ResponseEntity<?> register(@RequestBody GmailRequest gmailRequest) {
         return ResponseEntity.status(HttpStatus.OK).body("Gmail ile giriş yapıldı");
-    }
-
-
-    @PostMapping("/github")
-    public ResponseEntity<?> github(@RequestBody LoginRequest loginRequest) {
-        Optional<User> userOptional = userRepository.findByUsername(loginRequest.getUsername());
-
-        if (userOptional.isPresent() && passwordEncoder.matches(loginRequest.getPassword(), userOptional.get().getPassword())) {
-            return ResponseEntity.ok(new LoginResponse("mock-github-token", userOptional.get().getUsername()));
-        }
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid github");
     }
 }
