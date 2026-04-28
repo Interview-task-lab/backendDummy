@@ -35,6 +35,10 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
     }
 
+    @PostMapping("/profile")
+    public ResponseEntity<?> profile(@RequestBody GmailRequest gmailRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body("Profile sayfası açıldı.");
+    }
     @PostMapping("/gmail")
     public ResponseEntity<?> register(@RequestBody GmailRequest gmailRequest) {
         return ResponseEntity.status(HttpStatus.OK).body("Gmail ile giriş yapıldı");
